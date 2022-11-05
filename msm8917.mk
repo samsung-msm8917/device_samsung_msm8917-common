@@ -318,9 +318,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.power@1.2-service-qti
 
-# Properties
--include device/samsung/msm8917-common/vendor_prop.mk
-
 # Public Libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt \

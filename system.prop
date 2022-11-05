@@ -1,2 +1,40 @@
-# Import EFS Properities
-import /efs/factory.prop
+# Display
+sys.config.activelaunch_enable=true
+sys.config.phone_start_early=true
+sys.disable_ext_animation=1
+persist.sys.strictmode.disable=true
+
+# Disable Skip Validate
+sdm.debug.disable_skip_validate=1
+
+# Enable display default color mode
+vendor.display.enable_default_color_mode=1
+
+# Minimum duration for offload playback in secs
+audio.offload.min.duration.secs=30
+
+# Media
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+
+# Property to enable VDS WFD solution
+persist.hwc.enable_vds=1
+
+# Property to enable narrow search range for video encoding
+vendor.vidc.enc.narrow.searchrange=1
+
+# Radio
+rild.libpath=/system/lib64/libsec-ril.so
+rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/umts_ipc0
+ro.telephony.default_network=20,20
+telephony.lteOnCdmaDevice=1
+
+# Security
+ro.hardware.gatekeeper=mdfpp
+ro.hardware.keystore=mdfpp
+ro.security.keystore.keytype=sak,gak
+ro.security.vpnpp.release=2.0
+ro.security.vpnpp.ver=2.1
+security.ASKS.policy_version=000000
+security.mdpp.mass=skmm
+ro.error.receiver.default=com.samsung.receiver.error

@@ -19,6 +19,7 @@ BOARD_VENDOR := samsung
 BUILD_BROKEN_DUP_RULES := true
 
 TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
+TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
 # Architecture
 TARGET_ARCH := arm64
