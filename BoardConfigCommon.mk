@@ -37,10 +37,6 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
 
-# Platform
-TARGET_BOARD_PLATFORM := msm8937
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno308
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
 TARGET_NO_BOOTLOADER := true
@@ -134,19 +130,10 @@ DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(COMMON_PATH)/framework_compatibility_matrix.xml
 
 # Filesystem
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12348030976 # 25765059584 - 16384
-BOARD_CACHEIMAGE_PARTITION_SIZE := 106954752
-BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
-
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-
-ifneq ($(filter j6primelte,$(TARGET_DEVICE)),)
-    TARGET_COPY_OUT_VENDOR := vendor
-	BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-endif
+TARGET_COPY_OUT_VENDOR := vendor
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
 
@@ -187,11 +174,6 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 # Root
 BOARD_ROOT_EXTRA_FOLDERS := config omr efs
 
-# Recovery
-ifneq ($(filter j6primelte,$(TARGET_DEVICE)),)
-    TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
-endif
-
 # SELinux
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
@@ -201,9 +183,6 @@ SELINUX_IGNORE_NEVERALLOWS := true
 TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib/libsec-ril.so|libshims_ril.so \
     /system/vendor/lib/libsec-ril-dsds.so|libshims_ril.so
-
-# SurfaceFlinger
-TARGET_USE_QCOM_SURFACEFLINGER := true
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true

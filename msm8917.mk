@@ -360,13 +360,8 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     init.bloatware.rc \
     init.wifi.rc \
-    fstab.qcom \
     ueventd.qcom.rc
 
-ifneq ($(filter j6primelte,$(TARGET_DEVICE)),)
-    PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
-endif
 # RenderScript HAL
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0-impl
