@@ -241,6 +241,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
+ifneq ($(filter j4primelte j6primelte, $(TARGET_DEVICE)),)
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1:32 \
@@ -259,7 +260,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/etc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
     $(LOCAL_PATH)/nfc/etc/libnfc-nxp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nxp.conf \
     $(LOCAL_PATH)/nfc/etc/libnfc-nxp_RF.conf:$(TARGET_COPY_OUT_VENDOR)/etc/nfc/libnfc-nxp.conf
-    
+endif
+
 # OMX
 PRODUCT_PACKAGES += \
     libmm-omxcore \
