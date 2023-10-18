@@ -1,25 +1,11 @@
 #
 # Copyright (C) 2019-2020 The LineageOS Project
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# SPDX-License-Identifier: Apache-2.0
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 COMMON_PATH := device/samsung/msm8917-common
 BOARD_VENDOR := samsung
-
-BUILD_BROKEN_DUP_RULES := true
-
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
-TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
 # Architecture
 TARGET_ARCH := arm64
@@ -37,26 +23,6 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a53
 
 TARGET_USES_64_BIT_BINDER := true
-
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
-TARGET_NO_BOOTLOADER := true
-
-# Security patch level
-VENDOR_SECURITY_PATCH := 2019-04-01
-
-# Kernel
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 androidboot.selinux=permissive loop.max_part=7
-BOARD_KERNEL_BASE := 0x80000000
-BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
-BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/samsung/msm8917
-
-# FM
-BOARD_HAS_QCA_FM_SOC := "cherokee"
-BOARD_HAVE_QCOM_FM := true
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -94,6 +60,13 @@ AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
 
 # APEX
 TARGET_FLATTEN_APEX := true
+
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := RG13A002KU
+TARGET_NO_BOOTLOADER := true
+
+# Build
+BUILD_BROKEN_DUP_RULES := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(COMMON_PATH)/bluetooth/include
@@ -143,14 +116,16 @@ BOARD_ROOT_EXTRA_SYMLINKS := \
     /vendor/firmware_mnt:/firmware \
     /mnt/vendor/persist:/persist
 
+# FM
+BOARD_HAS_QCA_FM_SOC := "cherokee"
+BOARD_HAVE_QCOM_FM := true
+
 # Graphics
 BOARD_USES_ADRENO := true
-
 TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_HWC2 := true
-
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -158,11 +133,25 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 # HWUI
 HWUI_COMPILE_FOR_PERF := true
 
+# Kernel
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 androidboot.bootdevice=7824900.sdhci lpm_levels.sleep_disabled=1 loop.max_part=7
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8917
+
 # Lights
 TARGET_PROVIDES_LIBLIGHT=true
 
 # Power
 TARGET_USES_NON_LEGACY_POWERHAL := true
+
+# Properties
+TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
+TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
 # Qualcomm
 BOARD_USES_QCOM_HARDWARE := true
@@ -174,6 +163,9 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Root
 BOARD_ROOT_EXTRA_FOLDERS := config omr efs
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2019-04-01
 
 # SELinux
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
@@ -203,4 +195,5 @@ WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_HAVE_SAMSUNG_WIFI := true
 
--include vendor/samsung/msm8917-common/BoardConfigVendor.mk
+# Inherit from the proprietary version
+include vendor/samsung/msm8917-common/BoardConfigVendor.mk
